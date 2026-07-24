@@ -244,13 +244,15 @@ func _create_animation() -> void:
 		anim.length = float(total_frames) / ap_fps
 		anim.loop_mode = anim_info.loop_mode
 		
+		var atlas_sprite_path = get_path()
+		
 		var track_symbol = anim.add_track(Animation.TYPE_VALUE)
-		anim.track_set_path(track_symbol, ".:symbol")
+		anim.track_set_path(track_symbol, "%s:symbol" % atlas_sprite_path)
 		anim.value_track_set_update_mode(track_symbol, Animation.UPDATE_DISCRETE)
 		anim.track_insert_key(track_symbol, 0.0, anim_info.symbol_name)
 		
 		var track_frame = anim.add_track(Animation.TYPE_VALUE)
-		anim.track_set_path(track_frame, ".:cur_frame")
+		anim.track_set_path(track_frame, "%s:cur_frame" % atlas_sprite_path)
 		
 		anim.track_insert_key(track_frame, 0, 0)
 		anim.track_insert_key(track_frame, anim.length, total_frames)
