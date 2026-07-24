@@ -59,14 +59,12 @@ const NAMES_BASE = {
 		animation_player_node = value
 		notify_property_list_changed()
 
-@export var ap_fps: int = 24 ## The FPS the current animation will play at.
-
 ## List of animations that will be added into the [member animation_player_node]. [br] [br]
 ## [b]How to use?[/b][br]
 ## For each symbol you want to use, create an [AtlasAnimInfo] and enter the symbol's name into [member AtlasAnimInfo.symbol_name]. [br] [br]
 ## [i](This must be the full path to the symbol in the AE library, including any folders and such.)[/i] [br] [br]
 ## Once you've selected all the symbols you want to use, press the [code]Create Animation[/code] button and the animations will be added to your [member animation_player_node].
-@export var ap_animations: Array[AtlasAnimInfo] = []
+@export var animations_to_add: Array[AtlasAnimInfo] = []
 @export_tool_button("Create Animation") var ap_create_anim_button = _create_animation
 
 
@@ -232,7 +230,7 @@ func _create_animation() -> void:
 		push_error("The `animation_player_node` must be set!")
 		return
 
-	for anim_info in ap_animations:
+	for anim_info in animations_to_add:
 		if !symbols.has(anim_info.symbol_name): continue
 		
 		var layers = symbols[anim_info.symbol_name]
@@ -241,7 +239,7 @@ func _create_animation() -> void:
 			continue
 
 		var anim = Animation.new()
-		anim.length = float(total_frames) / ap_fps
+		anim.length = float(total_frames) / anim_info.fps
 		anim.loop_mode = anim_info.loop_mode
 		
 		var atlas_sprite_path = get_path()
