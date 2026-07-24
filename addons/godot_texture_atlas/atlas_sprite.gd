@@ -242,7 +242,7 @@ func _create_animation() -> void:
 		anim.length = float(total_frames) / anim_info.fps
 		anim.loop_mode = anim_info.loop_mode
 		
-		var atlas_sprite_path = get_path()
+		var atlas_sprite_path = animation_player_node.get_node(animation_player_node.root_node).get_path_to(self)
 		
 		var track_symbol = anim.add_track(Animation.TYPE_VALUE)
 		anim.track_set_path(track_symbol, "%s:symbol" % atlas_sprite_path)
