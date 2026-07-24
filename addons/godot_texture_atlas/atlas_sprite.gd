@@ -228,7 +228,6 @@ func get_index_at_frame(target_frame:int, frames:Array) -> Dictionary:
 	return {}
 
 func _create_animation() -> void:
-	animation_player_node = $AnimationPlayer if has_node("AnimationPlayer") else null
 	if animation_player_node == null:
 		push_error("The `animation_player_node` must be set!")
 		return
